@@ -1,0 +1,11 @@
+{
+  "name": "sleepsooth",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  // The worker runs first so it can 301 www to the apex; then short links, then the pages in ./public, then 404s.
+  "assets": { "directory": "./public", "binding": "ASSETS", "html_handling": "drop-trailing-slash", "run_worker_first": true },
+  "routes": [
+    { "pattern": "sleepsooth.com", "custom_domain": true },
+    { "pattern": "www.sleepsooth.com", "custom_domain": true }
+  ]
+}
