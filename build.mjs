@@ -23,10 +23,24 @@ const VIDEOS = [
   { id: "Ovi1t67XL3U", name: "Forest", page: "forest-sounds", title: "Forest Sounds for Sleep | 3D Audio 1 Hour Deep Sleep & Relaxation", date: "2026-10-19T23:18:43-07:00" },
   { id: "eo2tkngnfEE", name: "River stream", page: "river-sounds", title: "River Stream Sounds for Sleep | 3D Audio 1 Hour Deep Sleep & Relaxation", date: "2026-10-19T23:17:21-07:00" },
   { id: "QlD2SlOvIJ8", name: "Tibetan singing bowls", page: "tibetan-singing-bowls", title: "Tibetan Singing Bowls for Sleep | 3D Audio 1 Hour Deep Sleep & Meditation", date: "2026-10-20T14:02:00-07:00" },
+  { id: "BrEnI6H4a-8", name: "Deep focus piano & shakuhachi", page: "relaxation", title: "Deep Focus Music 🎹 Piano & Shakuhachi Flute | 30 Min Study & Work Session", date: "2026-10-20T15:44:58-07:00",
+    len: "30 minutes · focus music", dur: "PT30M", desc: "Thirty minutes of calm piano, cello and harp with a breathy shakuhachi flute at a gentle 64 BPM, for study and deep work." },
   { id: "HzTH8GMVWII", name: "Tin roof rain", page: "rain-sounds", title: "Heavy Rain on a Tin Roof for Sleep | 10 Hours Dark Screen 🌧️ Wind & Wind Chimes", date: "2026-10-22",
     len: "10 hours · dark screen", dur: "PT10H", desc: "Heavy rain on a tin roof with wind and wind chimes: ten hours, with a dark screen after three minutes." },
   { id: "xOsWyDAzIgM", name: "Piano & rain", page: "rain-sounds", title: "Soft Piano & Gentle Rain for Sleep | 10 Hours Dark Screen 🌧️ Calm Lake at Night", date: "2026-10-26",
     len: "10 hours · dark screen", dur: "PT10H", desc: "Soft piano and cello over a river, fine drizzle and distant rain: ten hours over a dark, slowly moving lake at night." },
+  { id: "tWj9yJQaQVo", name: "Temple bell & mountain wind", page: "relaxation", title: "Temple Bell & Mountain Wind for Sleep | 10 Hours Dark Screen 🏮 Misty Mountain Night", date: "2026-10-26T14:40:18-07:00",
+    len: "10 hours · dark screen", dur: "PT10H", desc: "A deep bronze temple bell, wind chimes and mountain wind over a soft drone: ten hours, with mist drifting past a lantern on a dark ridge." },
+  { id: "_4kztp08QRQ", name: "Music box lullaby & rain", page: "rain-sounds", title: "Music Box Lullaby & Soft Rain for Baby Sleep | 10 Hours Dark Screen 🌙 Starry Night", date: "2026-10-26T14:52:14-07:00",
+    len: "10 hours · dark screen", dur: "PT10H", desc: "A slow music box lullaby over soft rain: ten hours under a dark, starry sky with a small crescent moon." },
+  { id: "vbrdF0wpTjE", name: "Koshi chimes & garden stream", page: "river-sounds", title: "Koshi Chimes & Garden Stream for Sleep | 10 Hours Dark Screen 🎐 Moonlit Koi Pond", date: "2026-10-26T14:53:47-07:00",
+    len: "10 hours · dark screen", dur: "PT10H", desc: "Soft koshi chimes in a light breeze over a Japanese garden stream: ten hours, with koi drifting through a moonlit pond." },
+  { id: "IuD6z7Z6LKs", name: "Deep ocean & temple bells", page: "ocean-sounds", title: "Deep Ocean & Temple Bells for Sleep | 10 Hours Dark Screen 🪼 Deep Sea Drift", date: "2026-10-26T14:56:26-07:00",
+    len: "10 hours · dark screen", dur: "PT10H", desc: "A low, rolling deep-sea ambience with far-off temple bells: ten hours, with jellyfish drifting through the dark." },
+  { id: "uxhoYZdJEqE", name: "Bamboo flute & mountain stream", page: "river-sounds", title: "Bamboo Flute & Mountain Stream for Sleep | 10 Hours Dark Screen 🎋 Zen Moonlight", date: "2026-10-26T14:57:51-07:00",
+    len: "10 hours · dark screen", dur: "PT10H", desc: "A soft, breathy bamboo flute with long pauses over a mountain stream: ten hours under a full moon over a bamboo grove." },
+  { id: "bQ7SUKd0QOA", name: "Thunderstorm", page: "thunderstorm-sounds", title: "Thunderstorm Sounds for Sleep | 3D Audio 🎧 1 Hour Heavy Rain & Rolling Thunder", date: "2026-10-28T09:51:41-07:00",
+    desc: "Heavy rain, driving wind and rolling thunder: one uninterrupted hour in 3D audio, every strike from a new direction." },
 ];
 // Defaults for the 1-hour 3D videos; a video can override them (len = card label, dur = ISO 8601 duration).
 const vLen = v => v.len || "1 hour · 3D audio";
@@ -202,7 +216,7 @@ function jsonld(p) {
   if (p.home) {
     graph.push({ "@type": "WebSite", "@id": `${SITE}/#site`, name: "Soothing Sleep", url: `${SITE}/`, publisher: { "@id": `${SITE}/#org` } });
     graph.push({
-      "@type": "ItemList", name: "Hour-long 3D sleep sounds",
+      "@type": "ItemList", name: "Soothing Sleep sound videos",
       itemListElement: VIDEOS.map((v, i) => ({
         "@type": "ListItem", position: i + 1, item: {
           "@type": "VideoObject", name: v.title, description: vDesc(v),
@@ -284,7 +298,7 @@ function page(p) {
   const img = `${SITE}/og/${p.og}.jpg`;
   const main = p.home ? `
     <section aria-labelledby="videos">
-      <h2 id="videos">Hour-long 3D sleep sounds</h2>
+      <h2 id="videos">Sleep sound videos</h2>
       <p class="meta">Uninterrupted sleep sounds, from one hour in 3D to a full night with a dark screen. Best on headphones.</p>
       <div class="cards">
         ${VIDEOS.map(v => `<a class="card" href="https://www.youtube.com/watch?v=${v.id}" rel="noopener"><img src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" alt="${esc(v.name)} sounds for sleep, ${esc(vLen(v).split(" · ")[0])}" loading="lazy" width="1280" height="720"><div><strong>${esc(v.name)}</strong><span>${esc(vLen(v))} · YouTube</span></div></a>`).join("\n        ")}
@@ -391,7 +405,7 @@ fs.writeFileSync(path.join(out, "llms.txt"), `# Soothing Sleep
 ## Guides
 ${PAGES.filter(p => p.article).map(p => `- [${p.h1}](${url(p)}): ${strip(p.answer)}`).join("\n")}
 
-## Videos (1 hour each, 3D audio)
+## Videos (1-hour 3D audio, 10-hour dark-screen sleep sounds and focus music)
 ${VIDEOS.map(v => `- [${v.title}](https://www.youtube.com/watch?v=${v.id})`).join("\n")}
 
 ## Tools
