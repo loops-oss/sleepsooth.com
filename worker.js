@@ -10,6 +10,7 @@ const LINKS = {
   "/videos": `${CHANNEL}/videos`,
   "/shorts": `${CHANNEL}/shorts`,
   "/playlists": `${CHANNEL}/playlists`,
+  "/live": `${CHANNEL}/live`,           // always opens whatever is live now (the 24/7 stream)
   "/rain": "https://www.youtube.com/watch?v=kSrfISnnYjM",
   "/ocean": "https://www.youtube.com/watch?v=ayAra16BQnA",
   "/forest": "https://www.youtube.com/watch?v=Ovi1t67XL3U",
